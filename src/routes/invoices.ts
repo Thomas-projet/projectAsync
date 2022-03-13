@@ -23,9 +23,6 @@ export async function invoicesRoutes (fastify: FastifyInstance) {
           case MIME_TYPES.JSON:
             return request.body;
       
-          case MIME_TYPES.PDF:
-            throw new Error('PDF are not yet implemented');
-          
           default:{
             const jsxElement = showInvoice(request.body)
             return reply.type(MIME_TYPES.HTML).send(renderToString(jsxElement))
