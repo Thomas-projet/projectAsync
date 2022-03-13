@@ -6,37 +6,5 @@
  */
 
 export interface Invoice {
-  reference: string;
-  date: string;
-  paymentDelayInDays: number;
-  customer: {
-    name: string;
-    address: {
-      street: string;
-      city: string;
-      zipcode: string;
-      country: string;
-      state: string | null;
-      additional: string | null;
-    };
-  };
-  biller: {
-    address: {
-      street: string;
-      city: string;
-      zipcode: string;
-      country: string;
-      state: string | null;
-      additional: string | null;
-    };
-    phoneNumber: string;
-    email: string;
-    invoiceLegalFooter: string;
-  };
-  itemInvoices: {
-    description: string;
-    quantity: number;
-    unitPriceWithoutTax: number;
-    taxPercent: number;
-  }[];
+  choice: string;
 }

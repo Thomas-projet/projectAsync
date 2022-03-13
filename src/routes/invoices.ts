@@ -1,13 +1,10 @@
 import { FastifyInstance } from 'fastify'
 import { Invoice } from '../schemas/types/invoice'
-import {renderToString} from 'react-dom/server'
 import * as invoiceSchema from '../schemas/json/invoice.json'
-import showInvoice from '../templates/invoices/show'
+
 
 enum MIME_TYPES {
-  HTML = 'text/html',
   JSON = 'application/json',
-  PDF = 'application/pdf'
 }
 
 export async function invoicesRoutes (fastify: FastifyInstance) {
@@ -18,16 +15,21 @@ export async function invoicesRoutes (fastify: FastifyInstance) {
         body: invoiceSchema,
         response: { 200: invoiceSchema }
       },
-      handler: async function (request, reply): Promise<Invoice> {
-        switch (request.headers.accept) {
-          case MIME_TYPES.JSON:
-            return request.body;
-      
-          default:{
-            const jsxElement = showInvoice(request.body)
-            return reply.type(MIME_TYPES.HTML).send(renderToString(jsxElement))
-          }
+      handler: async function (request, reply): Promise<String> {
+        if(request.body.choice == "stone")
+        {
+          return "i chose leaf, i won !"
         }
+        else if(request.body.choice == "leaf")
+        {
+          return "i chose leaf too, equality !"
+        }
+        else if(request.body.choice == "scissors")
+        {
+          return "i chose leaf, you won !"
+        }
+        else
+            return "I did not understand your choice :c"
       }
     })
   }
